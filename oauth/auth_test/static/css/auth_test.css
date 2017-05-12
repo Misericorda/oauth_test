@@ -1,0 +1,8 @@
+.auth_block {
+    margin-top: 100px;
+}
+.friend {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}

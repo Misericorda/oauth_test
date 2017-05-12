@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="author" content="Dmitry Oleynik">
+	<title>Testing VK authentication</title>
+	<link href="{% static "css/auth_test.css" %}" rel="stylesheet">
+	<!-- foundation framework -->
+	<link href="{% static "css/foundation.css" %}" rel="stylesheet">
+</head>
+<body>
+	<div class="row">
+		<div class="medium-6 columns medium-offset-3">
+			<div class="auth_block">
+				{% if user.is_authenticated %}
+				<p class='text-center'>Добро пожаловать, {{ user.first_name }} {{ user.last_name }}!</p>
+				{% if friends %}
+				<div class="row small-up-2 medium-up-3">
+				{% for friend in friends %}
+					<div class="column friend">
+						<div class="card">
+							<a href="https://vk.com/id{{friend.id}}"><img src="{{friend.photo_200}}" alt=""></a>
+							<div class="card-section">
+								<p class='text-center'>{{ friend.first_name }} {{ friend.last_name }}</p>
+							</div>
+						</div>
+					</div> 
+				{% endfor %}
+				</div>
+				{% endif %}
+				<p><a class='button expanded' href="{% url 'auth_test:main_page' %}?log_out=True">Log-out</a></p>
+				{% else %}
+				<p><a class='button expanded' href="/login/vk-oauth2">Log-in via VK</a></p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</body>
+</html>
